@@ -1,0 +1,7 @@
+streamlit
+langchain
+google-generativeai
+faiss-cpu
+python-dotenv
+bs4
+tqdm
