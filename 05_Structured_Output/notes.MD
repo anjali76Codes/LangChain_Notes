@@ -1,48 +1,86 @@
-# Unstructured Output
+## **Unstructured Output**
 
-- when we give a text prompt to LLM then we get the response in the text
-- and text is unstructured output
+- When we give a text prompt to a Large Language Model (LLM), it typically returns a response in plain text.
+- This plain text is considered **unstructured output**, meaning it lacks a predefined format or schema.
+- Parsing unstructured text for downstream tasks often requires additional processing or pattern matching.
 
-# Structured Output
+---
 
-- here the LLMs return output in a well defined data format, eg: JSON
-- this makes the program output easier to parse
+## **Structured Output**
 
-# Use cases
+- In structured output, LLMs return data in a **well-defined format**, such as JSON.
+- This makes the output easier to **parse, store, and integrate** into applications or systems.
 
-- Data Extraction - if we want to store the LLM response in the database so there you need a structured output
-- API Building - Amazon product reviews, extract the key information and structure the pros, corns and sentiment and store it
-- Agents
+---
 
-# Ways to get structured Output
+## **Use Cases for Structured Output**
 
-- LLMs can or cannot generate structured output
-- but using langchain we can get structured output from both of the LLM types
-- Can generate structured output - function with_structured_output
-- Cannot generate structured output - Output parsers (classes)
+1. **Data Extraction**
 
-# With structured Output
+   - Example: Extracting information from resumes or documents and storing it in a database.
 
-1. Type Dict
-   define dictionary in python where you specify what keys and values should exist
-   it does not validate data at runtime (it just helps with type hints and tells us)
-   Annotation - adding a line so that LLM understands what we have to extract (along with the keys)
-   Optional
-   Literal
+2. **API Development**
 
-2. Pydantic
-   Data validation and data parsing library in python
-   It ensures that the data that you work with is correct, structured and type safe
-   Optional Fields
-   Type coercing - if we pass a string instead of a integer then it will implicitely do the type conversion
-   in build validation - eg: regarding the emails
-   field function - default values, constraints, description, regex
-   the pydantic object can also be converted to python dictionary or a json format
+   - Example: Summarizing Amazon product reviews by extracting pros, cons, and sentiment, then formatting it into a JSON schema.
 
-3. JSON Schema
-   It is used when your entire project is not made in a single language
+3. **Autonomous Agents**
 
-# Note
+   - Agents often require structured data to make decisions or perform tasks accurately.
 
-when we are using with_structured_output() function, it has a method parameter - we can set it to - json mode (gemini and cluade)
-function calling (when using agent that calls tools)
+---
+
+## **Ways to Get Structured Output from LLMs**
+
+- **LLMs may or may not natively support structured output.**
+- **LangChain** provides tools to achieve structured outputs from both types of LLMs:
+
+### 1. **LLMs That Can Generate Structured Output Directly**
+
+- Use LangChain's `with_structured_output()` function.
+- Example output formats: JSON, key-value dictionaries.
+
+### 2. **LLMs That Cannot Generate Structured Output Directly**
+
+- Use **Output Parsers** (classes in LangChain) to parse and structure the output after it's generated.
+
+---
+
+## **Techniques for Structuring Output**
+
+### 1. **Type Dict (Python Typing)**
+
+- Define a dictionary with specific keys and value types.
+- Used for **type hints** and documentation, not runtime validation.
+- Can include annotations like `Optional`, `Literal` for clarity.
+
+### 2. **Pydantic**
+
+- A Python library for data **validation** and **parsing**.
+- Ensures data is correctly typed and structured.
+- Key Features:
+
+  - **Optional Fields** using `Optional[]`
+  - **Type Coercion**: Automatically converts strings to integers, etc.
+  - **Built-in Validators** (e.g., for email formats)
+  - **`Field()` Function** for setting:
+
+    - Default values
+    - Constraints
+    - Descriptions
+    - Regex validation
+
+  - Objects can be easily converted to dictionaries or JSON.
+
+### 3. **JSON Schema**
+
+- A **language-agnostic** format for describing the structure of JSON data.
+- Useful in multi-language projects or API definitions.
+
+---
+
+## **LangChain Notes**
+
+- The `with_structured_output()` function has a `method` parameter:
+
+  - `json` — for LLMs like **Gemini** and **Claude** that support direct JSON mode.
+  - `function_calling` — when using agents or tools that require calling functions based on output.
